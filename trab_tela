@@ -1,0 +1,66 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class TarefaJanela extends JFrame {
+
+    private JComboBox<String> opcoesComboBox;
+    private String[] opcoes = {"Baixa","Média","Alta"};
+    private JTextField campo1TextField;
+
+
+    public TarefaJanela(){
+        setTitle("Cadastro Tarefa");
+        setSize(400,400);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        configurarJanela();
+        setVisible(true);
+
+    }
+
+    public void configurarJanela(){
+        JPanel panel = new JPanel();
+        opcoesComboBox = new JComboBox<>(opcoes);
+        campo1TextField = new JTextField( 10);
+        JButton salvarBotao = new JButton("Salvar");
+        JButton cancelBotao = new JButton("Cancelar");
+        JCheckBox checkboxfinaliz = new JCheckBox("Finalizar");
+        salvarBotao.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calcularResultado();
+            }
+        });
+
+        panel.add(new JLabel("Tarefa"));
+        panel.add(campo1TextField);
+        panel.add(opcoesComboBox);
+        panel.add(checkboxfinaliz);
+        panel.add(salvarBotao);
+        panel.add(cancelBotao);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        add(panel);
+    }
+
+    private void calcularResultado() {
+        int a = 0;
+        try {
+            a = Integer.parseInt(campo1TextField.getText());
+        }catch (Exception ignored){}
+        String operacao =  (String) opcoesComboBox.getSelectedItem();
+        }
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+public class Main {
+
+    public static void main(String[] args) {
+        TarefaJanela janela = new TarefaJanela();
+    }
+
+}
+
+
